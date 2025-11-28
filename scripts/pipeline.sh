@@ -21,10 +21,6 @@ OUT_MULTIQC="$OUT_DATA/multiqc"
 # Number of threads
 THREADS=4
 
-# Get unique sample IDs from input FASTQ files
-SAMPLES_IDS=$(find "$IN_DATA" -maxdepth 1 -name "*.fastq.gz" | \
-    xargs -n1 basename | cut -d"_" -f1 | sort | uniq)
-
 
 # CODE
 
@@ -49,6 +45,14 @@ fi
 # Index the contaminants file
 bash scripts/index.sh $CONTA_FILE $CONTA_IDX
 
+
+# Get unique sample IDs from input FASTQ files
+SAMPLES_IDS=$(find "$IN_DATA" -maxdepth 1 -name "*.fastq.gz" | \
+    xargs -n1 basename | cut -d"_" -f1 | sort | uniq)
+
+
+echo "Running pipline on $SAMPLES_IDS"
+
 # Merge the samples into a single file
 
 mkdir -p $OUT_MERG
@@ -61,6 +65,7 @@ done
 
 mkdir -p $LOG_CUT
 mkdir -p $OUT_CUT
+
 
 for sid in $SAMPLES_IDS; 
 do 
@@ -117,6 +122,6 @@ done
 echo "Summary appended to $LOG_SUM"
 
 # REPORT
- 
+
 mkdir -p $OUT_MULTIQC
 multiqc -o $OUT_MULTIQC "$(pwd)"
