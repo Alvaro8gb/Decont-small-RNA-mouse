@@ -8,7 +8,7 @@
 
 # Map argument keywords to directories
 declare -A DIR_MAP=(
-    ["data"]="data"
+    #["data"]="data"
     ["res"]="res"
     ["out"]="out"
     ["log"]="log"

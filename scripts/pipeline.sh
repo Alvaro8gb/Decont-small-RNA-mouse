@@ -11,7 +11,7 @@ OUT_DATA="out"
 
 LOG="log"
 LOG_CUT="$LOG/cutadapt"
-LOG_SUM="$LOG/summary.log"
+LOG_SUM="$LOG/Log.out.log"
 
 OUT_MERG="$OUT_DATA/merged"
 OUT_CUT="$OUT_DATA/cutadapt"
